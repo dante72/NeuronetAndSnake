@@ -9,19 +9,7 @@ namespace SnakeApp
 {
     class Field
     {
-        Snake snake = null;
-        public Snake Snake 
-        { set {
-                snake = value;
-                foreach (Point part in snake.Body)
-                    FieldMatrix[part.X, part.Y] = part;
-            }
-            get
-            {
-                return snake;
-            }
-        }
-        public Point[,] FieldMatrix{set; get;}
+        public Snake Snake { set; get; }
         public int Width { private set; get; }
         public int Height { private set; get; }
 
@@ -37,11 +25,7 @@ namespace SnakeApp
             this.Height = Height;
             this.PixelX = PixelX;
             this.PixelY = PixelY;
-
-            FieldMatrix = new Point[Width, Height];
             Snake = snake;
         }
-
-        public void SnakeRefresh() => Snake = Snake;
     }
 }
