@@ -25,5 +25,10 @@ namespace SnakeApp
             Body.Insert(0, Body[0].Sum(HeadDirection.Vector));
             Body.RemoveAt(Body.Count - 1);
         }
+
+        public void Eat()
+        {
+            Body.Insert(0, Body[0].Sum(HeadDirection.Vector));
+        }
     }
 }

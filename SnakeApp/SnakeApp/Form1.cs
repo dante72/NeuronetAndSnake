@@ -19,7 +19,9 @@ namespace SnakeApp
             Snake snake = new Snake(4, new Point(0, 0), Direction.Down);
             field = new Field(40, 40, 20, 20, snake);
             ClientSize = new Size(field.WidthInPixels, field.HeightInPixels);
+            field.AddApple();
 
+            timer1.Interval = 100;
             timer1.Enabled = true;
         }
 
@@ -27,12 +29,24 @@ namespace SnakeApp
         {
             e.Graphics.FillRectangle(Brushes.Black, new Rectangle(0, 0, field.WidthInPixels, field.HeightInPixels));
             foreach(Point part in field.Snake.Body)
-                e.Graphics.FillRectangle(Brushes.White, new Rectangle(part.X * field.PixelX, part.Y * field.PixelY, field.PixelX, field.PixelY));
+                e.Graphics.FillRectangle(Brushes.White, new Rectangle(part.X * field.ScaleX, part.Y * field.ScaleY, field.ScaleX, field.ScaleY));
+            e.Graphics.FillRectangle(Brushes.Red, new Rectangle(field.Apple.X * field.ScaleX, field.Apple.Y * field.ScaleY, field.ScaleX, field.ScaleY));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            field.Snake.Move();
+            if (field.Snake.Body[0] != field.Apple)
+                field.Snake.Move();
+            else
+            {
+                field.AddApple();
+                field.Snake.Eat();
+            }
+            if (field.GameOver())
+            {
+                field.Snake = new Snake(4, new Point(0, 0), Direction.Down);
+                field.AddApple();
+            }
             Refresh();
         }
 
