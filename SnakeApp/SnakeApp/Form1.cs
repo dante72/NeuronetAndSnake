@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace SnakeApp
 {
@@ -20,6 +21,7 @@ namespace SnakeApp
             field = new Field(40, 40, 20, 20, snake);
             ClientSize = new Size(field.WidthInPixels, field.HeightInPixels);
             field.AddApple();
+
 
             timer1.Interval = 100;
             timer1.Enabled = true;
@@ -47,6 +49,9 @@ namespace SnakeApp
                 field.Snake = new Snake(4, new Point(0, 0), Direction.Down);
                 field.AddApple();
             }
+
+            //Eye eye = new Eye(Direction8.Down, field);
+            //int[] arr = eye.Think();
             Refresh();
         }
 

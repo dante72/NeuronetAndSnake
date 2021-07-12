@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SnakeApp
 {
-    class Direction
+    public class Direction
     {
         public static Direction Up = new Direction(new Point(0, -1));
         public static Direction Right = new Direction(new Point(1, 0));

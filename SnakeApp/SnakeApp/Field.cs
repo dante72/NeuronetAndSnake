@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SnakeApp
 {
-    class Field
+    public class Field
     {
         public Snake Snake { set; get; }
         public Point Apple { set; get; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SnakeApp
 {
-    class Snake
+    public class Snake
     {
         public List<Point> Body { set; get; }
         public Direction HeadDirection { set; get; }
