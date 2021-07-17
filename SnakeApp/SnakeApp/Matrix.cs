@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeApp
 {
-    class Matrix
+    public class Matrix
     {
         public float[,] Content { private set; get; }
         public int Colums { private set; get; }
@@ -64,6 +64,24 @@ namespace SnakeApp
             else
                 throw new ArgumentException();
             return new Matrix(m);
+        }
+
+        public Matrix Unity(params Matrix[] m)
+        {
+            return new Matrix(3, 3,
+                m[0].Content[0, 0], m[0].Content[0, 1], m[0].Content[0, 2],
+                m[1].Content[0, 0], m[0].Content[0, 1], m[0].Content[0, 2],
+                m[2].Content[0, 0], m[0].Content[0, 1], m[0].Content[0, 2]
+                );
+        }
+
+        public float ElemSum()
+        {
+            float sum = 0;
+            for (int i = 0; i < Rows; i++)
+                for (int j = 0; j < Colums; j++)
+                    sum += Content[i, j];
+            return sum;
         }
     }
 }

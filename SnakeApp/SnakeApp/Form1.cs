@@ -14,6 +14,7 @@ namespace SnakeApp
     public partial class Form1 : Form
     {
         Field field;
+        Brain brain;
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace SnakeApp
             field = new Field(40, 40, 20, 20, snake);
             ClientSize = new Size(field.WidthInPixels, field.HeightInPixels);
             field.AddApple();
+            brain = new Brain(field);
 
             timer1.Interval = 100;
             timer1.Enabled = true;
@@ -48,8 +50,8 @@ namespace SnakeApp
                 field.Snake = new Snake(10, new Point(0, 0), Direction.Down);
                 field.AddApple();
             }
+            field.Snake.HeadDirection = brain.Think();
             Refresh();
-            //label1.Text = $"{arr[0]} {arr[1]} {arr[2]}";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
