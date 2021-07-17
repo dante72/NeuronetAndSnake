@@ -17,11 +17,10 @@ namespace SnakeApp
         public Form1()
         {
             InitializeComponent();
-            Snake snake = new Snake(4, new Point(0, 0), Direction.Down);
+            Snake snake = new Snake(10, new Point(0, 0), Direction.Down);
             field = new Field(40, 40, 20, 20, snake);
             ClientSize = new Size(field.WidthInPixels, field.HeightInPixels);
             field.AddApple();
-
 
             timer1.Interval = 100;
             timer1.Enabled = true;
@@ -46,13 +45,11 @@ namespace SnakeApp
             }
             if (field.GameOver())
             {
-                field.Snake = new Snake(4, new Point(0, 0), Direction.Down);
+                field.Snake = new Snake(10, new Point(0, 0), Direction.Down);
                 field.AddApple();
             }
-
-            //Eye eye = new Eye(Direction8.Down, field);
-            //int[] arr = eye.Think();
             Refresh();
+            //label1.Text = $"{arr[0]} {arr[1]} {arr[2]}";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -70,6 +67,9 @@ namespace SnakeApp
                     break;
                 case Keys.Left:
                     field.Snake.HeadDirection = Direction.Left;
+                    break;
+                case Keys.Space:
+                    timer1.Enabled = !timer1.Enabled;
                     break;
             }
         }

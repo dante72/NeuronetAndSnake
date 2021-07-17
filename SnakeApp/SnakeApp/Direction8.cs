@@ -18,6 +18,8 @@ namespace SnakeApp
         public static Direction8 Left = new Direction8(new Point(-1, 0));
         public static Direction8 LeftUp = new Direction8(new Point(-1, -1));
         public Point Vector { private set; get; }
+
+        public static Direction8[] All = new Direction8[] { Up, RightUp, Right, RightDown, Down, LeftDown, Left, LeftUp };
         private Direction8(Point Vector)
         {
             this.Vector = Vector;

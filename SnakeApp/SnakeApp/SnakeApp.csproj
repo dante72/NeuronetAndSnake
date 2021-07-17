@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Brain.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Direction8.cs" />
     <Compile Include="Field.cs" />
@@ -61,7 +60,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Neuron.cs" />
+    <Compile Include="Matrix.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
