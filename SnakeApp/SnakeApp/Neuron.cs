@@ -82,7 +82,7 @@ namespace SnakeApp
 
     public class Hidden : Neuron
     {
-        Matrix Xfactor = new Matrix(1, 3, -0.5f, 1f, -0.5f);
+        Matrix Xfactor = new Matrix(1, 3, -1f, 1f, -0.5f);
         public Direction Direction;
         public Hidden(Direction Direction, params Neuron[] neurons)
         {
