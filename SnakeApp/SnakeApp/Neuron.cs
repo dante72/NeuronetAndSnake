@@ -10,7 +10,7 @@ namespace SnakeApp
     public abstract class Neuron
     {
         public List<Neuron> InputSignals = new List<Neuron>();
-        public Neuron OutputSignal;
+        //public Neuron OutputSignal;
 
         public abstract Matrix Think();
 
@@ -82,10 +82,11 @@ namespace SnakeApp
 
     public class Hidden : Neuron
     {
-        Matrix Xfactor = new Matrix(1, 3, -1f, 1f, -0.5f);
+        Matrix Weights;
         public Direction Direction;
-        public Hidden(Direction Direction, params Neuron[] neurons)
+        public Hidden(Matrix Weights, Direction Direction, params Neuron[] neurons)
         {
+            this.Weights = Weights;
             this.Direction = Direction;
             foreach (Neuron neuron in neurons)
                 InputSignals.Add(neuron);
@@ -98,7 +99,31 @@ namespace SnakeApp
                 for (int j = 0; j < InputSignals[i].Think().Colums; j++)
                     m[i, j] = InputSignals[i].Think().Content[0, j];
 
-            return new Matrix(m).Mult(Xfactor.Transpose());
+            return new Matrix(m).Mult(Weights.Transpose());
+        }
+    }
+
+    public class OutputNeuron : Neuron
+    {
+        public OutputNeuron(params Neuron[] neurons)
+        {
+            foreach (Neuron neuron in neurons)
+                InputSignals.Add(neuron);
+        }
+        public  Direction ResultDirection()
+        {
+            Neuron max = InputSignals[0];
+
+            for (int i = 1; i < InputSignals.Count; i++)
+                if (max.Think().ElemSum() < InputSignals[i].Think().ElemSum())
+                    max = InputSignals[i];
+
+            return ((Hidden)max).Direction;
+        }
+
+        public override Matrix Think()
+        {
+            throw new NotImplementedException();
         }
     }
 }
