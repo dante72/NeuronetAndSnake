@@ -68,11 +68,25 @@ namespace SnakeApp
 
         public Matrix Unity(params Matrix[] m)
         {
-            return new Matrix(3, 3,
-                m[0].Content[0, 0], m[0].Content[0, 1], m[0].Content[0, 2],
-                m[1].Content[0, 0], m[0].Content[0, 1], m[0].Content[0, 2],
-                m[2].Content[0, 0], m[0].Content[0, 1], m[0].Content[0, 2]
-                );
+            int cols = m[0].Colums;
+            for (int i = 1; i < m.Length; i++)
+                if (m[i].Colums != cols)
+                    throw new ArgumentException("The matrices must have the same length!");
+
+            int rows = 0;
+            for (int i = 0; i < m.Length; i++)
+                rows += m[i].Rows;
+
+            float [,]matrix = new float[rows, cols];
+            int mrow = 0;
+            for (int i = 0; i < m.Length; i++)
+                for (int j = 0; j < m[i].Rows; j++)
+                {
+                    for (int k = 0; k < m[k].Colums; k++)
+                        matrix[mrow, k] = m[i].Content[j, k];
+                    mrow++;
+                }
+            return new Matrix(matrix);
         }
 
         public float ElemSum()
